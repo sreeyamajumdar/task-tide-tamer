@@ -1,7 +1,8 @@
 
-import { Category, categoryColors, categoryIcons } from "@/utils/taskUtils";
 import { cn } from "@/lib/utils";
+import { Category, categoryColors, categoryIcons } from "@/utils/taskUtils";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface CategoryBadgeProps {
   category: Category;
@@ -9,7 +10,12 @@ interface CategoryBadgeProps {
 }
 
 const CategoryBadge = ({ category, className }: CategoryBadgeProps) => {
-  const IconComponent = LucideIcons[categoryIcons[category] as keyof typeof LucideIcons];
+  // Get the icon name from categoryIcons
+  const iconName = categoryIcons[category];
+  
+  // Dynamically access the correct icon component from LucideIcons
+  // We need to cast this to any because TypeScript doesn't know which keys exist at compile time
+  const IconComponent = LucideIcons[iconName as keyof typeof LucideIcons] as LucideIcon;
   
   return (
     <div 
